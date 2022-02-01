@@ -47,25 +47,36 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<NumberCubit, NumberState>(builder: (context, state) {
-          if ((state is! NumberLoaded)) {
-            return const Center(child: CircularProgressIndicator());
-          }
+        child: Column(
+          children: [
+            BlocBuilder<NumberCubit, NumberState>(builder: (context, state) {
+              if ((state is! NumberLoaded)) {
+                return const Center(child: CircularProgressIndicator());
+              }
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(state.msg.split(" ")[0], textScaleFactor: 5),
-              const SizedBox(height: 20),
-              Text(
-                state.msg,
-                textScaleFactor: 2,
-                textAlign: TextAlign.center,
-              )
-            ],
-          );
-        }),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(state.msg.split(" ")[0], textScaleFactor: 5),
+                  const SizedBox(height: 20),
+                  Text(
+                    state.msg,
+                    textScaleFactor: 2,
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              );
+            }),
+            const Spacer(),
+            const TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter a number',
+                border: OutlineInputBorder(),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
